@@ -3,6 +3,7 @@
     {
       "container_name": "nextcloud-aio-apache",
       "image_tag": "%AIO_CHANNEL%",
+      "documentation": "https://github.com/nextcloud/all-in-one/discussions/2105",
       "depends_on": [
         "nextcloud-aio-onlyoffice",
         "nextcloud-aio-collabora",
@@ -299,6 +300,7 @@
       "environment": [
         "NC_DOMAIN=%NC_DOMAIN%",
         "NEXTCLOUD_HOST=nextcloud-aio-nextcloud",
+        "TZ=%TIMEZONE%",
         "REDIS_HOST=nextcloud-aio-redis",
         "REDIS_HOST_PASSWORD=%REDIS_PASSWORD%",
         "POSTGRES_HOST=nextcloud-aio-database",
@@ -856,6 +858,9 @@
       "expose": [
         "3002"
       ],
+      "tmpfs": [
+        "/tmp"
+      ],
       "internal_port": "3002",
       "environment": [
         "TZ=%TIMEZONE%",
@@ -863,7 +868,8 @@
         "JWT_SECRET_KEY=%WHITEBOARD_SECRET%",
         "STORAGE_STRATEGY=redis",
         "REDIS_HOST=nextcloud-aio-redis",
-        "REDIS_HOST_PASSWORD=%REDIS_PASSWORD%"
+        "REDIS_HOST_PASSWORD=%REDIS_PASSWORD%",
+        "BACKUP_DIR=/tmp"
       ],
       "secrets": [
         "WHITEBOARD_SECRET",
